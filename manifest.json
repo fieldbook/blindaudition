@@ -1,0 +1,7 @@
+{
+  "manifest_version": 2,
+  "name": "Blind Audition",
+  "version": "0.1.0",
+  "description": "Anonymizes candidates on AngelList and LinkedIn.",
+  "author": "Jason Crawford <jason@jasoncrawford.org>"
+}
