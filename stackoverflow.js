@@ -12,5 +12,5 @@ blind({
       pic: '.personal-block img',
     },
   ],
-  anonymousImgSrc: 'https://angel.co/images/shared/nopic.png',
+  anonymousImgSrc: 'http://cdn-careers.sstatic.net/careers/Img/default-user-gravatar-large.png',
 });
