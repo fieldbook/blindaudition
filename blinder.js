@@ -1,15 +1,11 @@
 function Blinder(options) {
-  if (options.profile && !options.profiles) {
-    options.profiles = [options.profile];
-  }
-
   var self = this;
   Blinder.params.forEach(function (param) {
     self[param] = options[param] || Blinder.defaults[param];
   })
 }
 
-Blinder.params = ['container', 'profiles', 'anonymousName', 'anonymousImgSrc'];
+Blinder.params = ['container', 'displayTypes', 'anonymousName', 'anonymousImgSrc'];
 
 Blinder.defaults = {
   anonymousName: 'A Candidate',
@@ -23,22 +19,22 @@ Blinder.prototype.start = function () {
 
 Blinder.prototype.anonymize = function () {
   var self = this;
-  this.profiles.forEach(function (profile) {
-    self.anonymizeProfileType(profile);
+  this.displayTypes.forEach(function (type) {
+    self.anonymizeDisplayType(type);
   })
 }
 
-Blinder.prototype.anonymizeProfileType = function (profile) {
+Blinder.prototype.anonymizeDisplayType = function (type) {
   var self = this;
-  var elements = document.querySelectorAll(profile.element);
+  var elements = document.querySelectorAll(type.element);
   Array.prototype.forEach.call(elements, function (element) {
-    self.anonymizeOneProfile(element, profile);
+    self.anonymizeDisplay(element, type);
   })
 }
 
-Blinder.prototype.anonymizeOneProfile = function (element, profile) {
-  var name = element.querySelector(profile.name);
-  var pic = element.querySelector(profile.pic);
+Blinder.prototype.anonymizeDisplay = function (element, type) {
+  var name = element.querySelector(type.name);
+  var pic = element.querySelector(type.pic);
   if (name) name.textContent = this.anonymousName;
   if (pic) pic.setAttribute('src', this.anonymousImgSrc);
 }

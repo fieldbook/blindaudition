@@ -1,6 +1,6 @@
 blind({
   container: '#candidate-search-interface',
-  profiles: [
+  displayTypes: [
     {
       element: '.search-result',
       name: '.name',
