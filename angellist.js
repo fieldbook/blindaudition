@@ -2,9 +2,9 @@ blind({
   container: '#candidates_content',
   displayTypes: [
     {
-      element: '.candidate-row',
-      name: '.candidate-name a',
-      pic: '.pic img',
+      element: '.card-content-container',
+      name: '.js-browse-table-row-name a',
+      pic: '.candidate-picture img',
     },
   ],
   anonymousImgSrc: 'https://angel.co/images/shared/nopic.png',

@@ -6,7 +6,7 @@
   "author": "Jason Crawford <jason@jasoncrawford.org>",
   "content_scripts": [
     {
-      "matches": ["*://angel.co/candidates/*"],
+      "matches": ["*://angel.co/*candidates*"],
       "js": ["blinder.js", "angellist.js"]
     },
     {
