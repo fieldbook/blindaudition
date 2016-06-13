@@ -3,7 +3,7 @@
   "name": "Blind Audition",
   "version": "0.1.0",
   "description": "Anonymizes candidates on recruiting sites such as AngelList and Stack Overflow.",
-  "author": "Jason Crawford <jason@jasoncrawford.org>",
+  "author": "Jason Crawford <jason@fieldbook.com>",
   "content_scripts": [
     {
       "matches": ["*://angel.co/*candidates*"],
