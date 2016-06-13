@@ -1,45 +1,70 @@
 function Blinder(options) {
-  var self = this;
-  Blinder.params.forEach(function (param) {
-    self[param] = options[param] || Blinder.defaults[param];
-  })
+  this.setOptions(options);
 }
 
-Blinder.params = ['container', 'displayTypes', 'anonymousName', 'anonymousImgSrc'];
+Blinder.params = ['anonymousName', 'anonymousImgSrc'];
 
 Blinder.defaults = {
   anonymousName: 'A Candidate',
 }
 
-Blinder.prototype.start = function () {
-  var container = document.querySelector(this.container);
-  if (container) container.addEventListener('DOMNodeInserted', this.anonymize.bind(this));
-  this.anonymize();
-}
-
-Blinder.prototype.anonymize = function () {
-  var self = this;
-  this.displayTypes.forEach(function (type) {
-    self.anonymizeDisplayType(type);
+Blinder.prototype.setOptions = function (options) {
+  var newOptions = {};
+  Blinder.params.forEach(function (param) {
+    newOptions[param] = options[param] || Blinder.defaults[param];
   })
+  this.options = newOptions;
 }
 
-Blinder.prototype.anonymizeDisplayType = function (type) {
+Blinder.prototype.lookupElementIfNeeded = function (selectorOrElement) {
+  if (typeof selectorOrElement === 'string') {
+    return document.querySelector(selectorOrElement);
+  }
+  return selectorOrElement;
+}
+
+Blinder.prototype.lookupElementsIfNeeded = function (selectorOrElements) {
+  if (typeof selectorOrElements === 'string') {
+    return document.querySelectorAll(selectorOrElements);
+  }
+  return selectorOrElements;
+}
+
+Blinder.prototype.blind = function (selectorOrElement, fn) {
+  var element = this.lookupElementIfNeeded(selectorOrElement);
+  if (!element) return;
+
   var self = this;
-  var elements = document.querySelectorAll(type.element);
+  element.addEventListener('DOMNodeInserted', function () {
+    self.blindElement(element, fn);
+  });
+  self.blindElement(element, fn);
+}
+
+Blinder.prototype.blindElement = function (selectorOrElement, fn) {
+  var element = this.lookupElementIfNeeded(selectorOrElement);
+  if (!element) return;
+
+  var blinder = new Blinder(this.options);
+  blinder.element = element;
+  fn.apply(blinder);
+  return blinder;
+}
+
+Blinder.prototype.blindElements = function (selectorOrElements, fn) {
+  var self = this;
+  var elements = this.lookupElementsIfNeeded(selectorOrElements);
   Array.prototype.forEach.call(elements, function (element) {
-    self.anonymizeDisplay(element, type);
+    self.blindElement(element, fn);
   })
 }
 
-Blinder.prototype.anonymizeDisplay = function (element, type) {
-  var name = element.querySelector(type.name);
-  var pic = element.querySelector(type.pic);
-  if (name) name.textContent = this.anonymousName;
-  if (pic) pic.setAttribute('src', this.anonymousImgSrc);
+Blinder.prototype.blindName = function (selector) {
+  var name = this.element.querySelector(selector);
+  if (name) name.textContent = this.options.anonymousName;
 }
 
-function blind(options) {
-  var blinder = new Blinder(options);
-  blinder.start();
+Blinder.prototype.blindPic = function (selector) {
+  var pic = this.element.querySelector(selector);
+  if (pic) pic.setAttribute('src', this.options.anonymousImgSrc);
 }
