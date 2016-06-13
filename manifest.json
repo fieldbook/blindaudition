@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Blind Audition",
   "version": "0.1.0",
-  "description": "Anonymizes candidates on recruiting sites such as AngelList and Stack Overflow.",
+  "description": "Anonymizes candidates on recruiting sites",
   "author": "Jason Crawford <jason@fieldbook.com>",
 
   "icons": {
