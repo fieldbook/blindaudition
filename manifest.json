@@ -12,6 +12,10 @@
     {
       "matches": ["*://careers.stackoverflow.com/employer/*"],
       "js": ["blinder.js", "stackoverflow.js"]
+    },
+    {
+      "matches": ["*://www.linkedin.com/*"],
+      "js": ["blinder.js", "linkedin.js"]
     }
   ]
 }
