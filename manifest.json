@@ -7,15 +7,15 @@
   "content_scripts": [
     {
       "matches": ["*://angel.co/*candidates*"],
-      "js": ["blinder.js", "angellist.js"]
+      "js": ["blinder.js", "sites/angellist.js"]
     },
     {
       "matches": ["*://careers.stackoverflow.com/employer/*"],
-      "js": ["blinder.js", "stackoverflow.js"]
+      "js": ["blinder.js", "sites/stackoverflow.js"]
     },
     {
       "matches": ["*://www.linkedin.com/*"],
-      "js": ["blinder.js", "linkedin.js"]
+      "js": ["blinder.js", "sites/linkedin.js"]
     }
   ]
 }
