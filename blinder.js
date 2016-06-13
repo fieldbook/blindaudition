@@ -1,5 +1,6 @@
 function Blinder(options) {
   this.setOptions(options);
+  this.element = document;
 }
 
 Blinder.params = ['anonymousName', 'anonymousImgSrc'];
@@ -18,14 +19,14 @@ Blinder.prototype.setOptions = function (options) {
 
 Blinder.prototype.lookupElementIfNeeded = function (selectorOrElement) {
   if (typeof selectorOrElement === 'string') {
-    return document.querySelector(selectorOrElement);
+    return this.element.querySelector(selectorOrElement);
   }
   return selectorOrElement;
 }
 
 Blinder.prototype.lookupElementsIfNeeded = function (selectorOrElements) {
   if (typeof selectorOrElements === 'string') {
-    return document.querySelectorAll(selectorOrElements);
+    return this.element.querySelectorAll(selectorOrElements);
   }
   return selectorOrElements;
 }
@@ -59,12 +60,12 @@ Blinder.prototype.blindElements = function (selectorOrElements, fn) {
   })
 }
 
-Blinder.prototype.blindName = function (selector) {
-  var name = this.element.querySelector(selector);
-  if (name) name.textContent = this.options.anonymousName;
+Blinder.prototype.blindName = function (selectorOrElement) {
+  var element = this.lookupElementIfNeeded(selectorOrElement);
+  if (element) element.textContent = this.options.anonymousName;
 }
 
-Blinder.prototype.blindPic = function (selector) {
-  var pic = this.element.querySelector(selector);
-  if (pic) pic.setAttribute('src', this.options.anonymousImgSrc);
+Blinder.prototype.blindPic = function (selectorOrElement) {
+  var element = this.lookupElementIfNeeded(selectorOrElement);
+  if (element) element.setAttribute('src', this.options.anonymousImgSrc);
 }
