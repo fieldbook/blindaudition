@@ -82,8 +82,12 @@ Blinder.prototype.blind = function (selectorOrElement, fn) {
   if (!element) return;
 
   var self = this;
+  var blinding = false;
   element.addEventListener('DOMNodeInserted', function () {
+    if (blinding) return; // prevent the blinding code from triggering this in a nested way
+    blinding = true;
     self.blindElement(element, fn);
+    blinding = false;
   });
   self.blindElement(element, fn);
 }
