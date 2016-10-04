@@ -17,7 +17,7 @@
       "js": ["blinder.js", "sites/alist.js"]
     },
     {
-      "matches": ["*://angel.co/*candidates*"],
+      "matches": ["*://angel.co/*"],
       "js": ["blinder.js", "sites/angellist.js"]
     },
     {

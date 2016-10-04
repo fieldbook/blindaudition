@@ -8,4 +8,11 @@ blinder.blind('#candidates_content', function () {
   })
 })
 
-// TODO: Profile pages (e.g., https://angel.co/jasoncrawford)
+blinder.blind('#root .profile', function () {
+  document.title = "AngelList"; // remove candidate name from title
+
+  this.blindElement('.subheader', function () {
+    this.blindName('.profile-text h1');
+    this.blindPic('.subheader-avatar img');
+  })
+})
