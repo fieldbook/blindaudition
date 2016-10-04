@@ -4,13 +4,24 @@ var blinder = new Blinder({
 
 // Blinds a profile page (e.g., https://www.linkedin.com/in/jasonc)
 blinder.blind('#body', function () {
+  document.title = "LinkedIn" // remove candidate name from tab title
+
   this.blindElements('.profile-card', function () {
     this.blindName('.full-name');
     this.blindPic('.profile-picture img');
   })
 
+  this.blindElement('.connections-map-viewee', function () {
+    var containers = this.element.querySelectorAll('.new-miniprofile-container');
+    this.blindElement(containers[0], function () {
+      this.blindPic('img');
+    })
+    this.blindElement(containers[1], function () {
+      this.blindName('strong');
+    })
+  })
+
   // TODO:
-  // Replace document.title
   // Replace candidate name and image in various other places throughout the page
 })
 
