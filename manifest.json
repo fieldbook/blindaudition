@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Blind Audition",
-  "version": "0.2",
+  "version": "0.3",
   "description": "Anonymizes candidates on recruiting sites",
   "author": "Jason Crawford <jason@fieldbook.com>",
 
