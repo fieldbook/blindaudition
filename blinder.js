@@ -37,6 +37,7 @@ Blinder.defaults = {
 
 // Sets options defined in Blinder.params, using Blinder.defaults if options are not supplied.
 Blinder.prototype.setOptions = function (options) {
+  options = options || {};
   var newOptions = {};
   Blinder.params.forEach(function (param) {
     newOptions[param] = options[param] || Blinder.defaults[param];
