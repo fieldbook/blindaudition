@@ -27,6 +27,10 @@
     {
       "matches": ["*://www.linkedin.com/*"],
       "js": ["blinder.js", "sites/linkedin.js"]
+    },
+    {
+      "matches": ["*://company.underdog.io/batch/*"],
+      "js": ["blinder.js", "sites/underdog.js"]
     }
   ]
 }
