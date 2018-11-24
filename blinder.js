@@ -160,8 +160,8 @@ Blinder.prototype.blindGender = function (selectorOrElement) {
   var element = this.lookupElementIfNeeded(selectorOrElement);
   if (!element) return;
   if (element.getAttribute('blindGender')) return;
+  element.setAttribute('blindGender', true);
   this.substituteNeutralGender(element.textContent, function (neutralizedText) {
     element.textContent = neutralizedText;
-    element.setAttribute('blindGender', true);
   })
 }
