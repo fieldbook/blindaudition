@@ -24,13 +24,15 @@ function Blinder(options) {
 }
 
 Blinder.params = [
-  'anonymousName',      // Placeholder text to blind candidate names with
-  'anonymousEmail',     // Placeholder text to blind candidate emails with
-  'anonymousImgSrc',    // Source URL of a placeholder image. This is typically a per-site setting
+  'anonymousName',        // Placeholder text to blind candidate names with
+  'anonymousNameForText', // Placeholder text for replacing a candidate name in a paragraph of text
+  'anonymousEmail',       // Placeholder text to blind candidate emails with
+  'anonymousImgSrc',      // Source URL of a placeholder image. This is typically a per-site setting
 ];
 
 Blinder.defaults = {
   anonymousName: 'A Candidate',
+  anonymousNameForText: 'Candidate',
   anonymousEmail: 'hidden@example.com',
 }
 
@@ -78,6 +80,24 @@ Blinder.prototype.substituteNeutralGender = function (text, callback) {
     console.error('request error');
   }
   request.send(text);
+}
+
+// taken from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+function escapeRegExp(string) {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+}
+
+// Takes a block of text and a name, and replaces the name, or any whole-word prefix of it, with
+// an anonymized string. E.g., for the name "Mary Jane Watson", will replace "Mary Jane Watson",
+// "Mary Jane", or just "Mary" with "Candidate" (or the configured `anonymousNameForText`).
+Blinder.prototype.replaceNameInText = function (text, fullName) {
+  var nameWords = fullName.split(' ');
+  for (var i = nameWords.length; i > 0; i--) {
+    var namePrefix = nameWords.slice(0, i).join(' ');
+    var pattern = new RegExp(escapeRegExp(namePrefix), 'g');
+    text = text.replace(pattern, this.options.anonymousNameForText);
+  }
+  return text;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -164,4 +184,9 @@ Blinder.prototype.blindGender = function (selectorOrElement) {
   this.substituteNeutralGender(element.textContent, function (neutralizedText) {
     element.textContent = neutralizedText;
   })
+}
+
+Blinder.prototype.blindNameInText = function (selectorOrElement, fullName) {
+  var element = this.lookupElementIfNeeded(selectorOrElement);
+  if (element) element.textContent = this.replaceNameInText(element.textContent, fullName);
 }
