@@ -88,7 +88,7 @@ Blinder.prototype.substituteNeutralGender = function (text, callback) {
 //
 // The blind, blindElement, and blindElements methods are used to iterate through the structure.
 // They are to be used in nested fashion. Each one takes a selector and drills one level into the
-// DOM tree, invoking the given function in the nex tcontext.
+// DOM tree, invoking the given function in the next context.
 //
 // The blindName and blindPic methods simply replace the given text or image elements with
 // appropriate anonymized versions.
