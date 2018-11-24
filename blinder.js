@@ -182,12 +182,14 @@ Blinder.prototype.blindGender = function (selectorOrElement) {
   if (element.getAttribute('blindGender')) return;
   element.setAttribute('blindGender', true);
   this.substituteNeutralGender(element.textContent, function (neutralizedText) {
-    element.textContent = neutralizedText;
+    element.innerHTML = neutralizedText.replace(/\n/g, '\n<br>');
   })
 }
 
 Blinder.prototype.blindNameInText = function (selectorOrElement, fullName) {
   if (!fullName) return;
   var element = this.lookupElementIfNeeded(selectorOrElement);
-  if (element) element.textContent = this.replaceNameInText(element.textContent, fullName);
+  if (!element) return;
+  var blindedText = this.replaceNameInText(element.textContent, fullName);
+  element.innerHTML = blindedText.replace(/\n/g, '\n<br>');
 }
