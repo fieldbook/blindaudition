@@ -28,9 +28,24 @@ blinder.blind('body', function () {
   this.blindName('.person-name');
   this.blindEmail('.contact-item .email-candidate-icon');
 
-  this.blindElement('.scorecard-section', function () {
-    this.blindElements('.question-answers p', function () {
-      if (name) this.blindNameInText(this.element, name);
+  this.blindElements('.scorecard-section', function () {
+    this.blindElements('.question-answers p,.notes-content p', function () {
+      this.blindNameInText(this.element, name);
+      this.blindGender(this.element);
+    })
+  })
+
+  this.blindElement('.candidate-controls', function () {
+    this.blindElements('.alert', function () {
+      this.blindNameInText(this.element, name);
+    })
+
+    this.blindElements('button', function () {
+      this.blindNameInText(this.element, name);
+    })
+
+    this.blindElements('.note-text', function () {
+      this.blindNameInText(this.element, name);
       this.blindGender(this.element);
     })
   })

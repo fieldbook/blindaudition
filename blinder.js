@@ -187,6 +187,7 @@ Blinder.prototype.blindGender = function (selectorOrElement) {
 }
 
 Blinder.prototype.blindNameInText = function (selectorOrElement, fullName) {
+  if (!fullName) return;
   var element = this.lookupElementIfNeeded(selectorOrElement);
   if (element) element.textContent = this.replaceNameInText(element.textContent, fullName);
 }
