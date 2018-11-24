@@ -63,6 +63,23 @@ Blinder.prototype.lookupElementsIfNeeded = function (selectorOrElements) {
   return selectorOrElements;
 }
 
+// Takes a string and replaces gender-specific pronouns with neutral ones, using an external API.
+Blinder.prototype.substituteNeutralGender = function (text, callback) {
+  let request = new XMLHttpRequest();
+  request.open('POST', 'https://neutralizer-api.herokuapp.com/neutralize');
+  request.onload = function () {
+    if (this.status >= 200 && this.status < 400) {
+      callback(this.responseText);
+    } else {
+      console.error('error response', this.status, this.statusText);
+    }
+  }
+  request.onerror = function () {
+    console.error('request error');
+  }
+  request.send(text);
+}
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // Blinder methods
 //
@@ -135,4 +152,16 @@ Blinder.prototype.blindEmail = function (selectorOrElement) {
 Blinder.prototype.blindPic = function (selectorOrElement) {
   var element = this.lookupElementIfNeeded(selectorOrElement);
   if (element) element.setAttribute('src', this.options.anonymousImgSrc);
+}
+
+// Replaced gendered pronouns (he, she, his, hers, etc.) with gender-neutral “they” equivalents.
+// Uses substituteNeutralGender, which calls out to an external API to do this transformation.
+Blinder.prototype.blindGender = function (selectorOrElement) {
+  var element = this.lookupElementIfNeeded(selectorOrElement);
+  if (!element) return;
+  if (element.getAttribute('blindGender')) return;
+  this.substituteNeutralGender(element.textContent, function (neutralizedText) {
+    element.textContent = neutralizedText;
+    element.setAttribute('blindGender', true);
+  })
 }
