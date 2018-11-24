@@ -25,11 +25,13 @@ function Blinder(options) {
 
 Blinder.params = [
   'anonymousName',      // Placeholder text to blind candidate names with
+  'anonymousEmail',     // Placeholder text to blind candidate emails with
   'anonymousImgSrc',    // Source URL of a placeholder image. This is typically a per-site setting
 ];
 
 Blinder.defaults = {
   anonymousName: 'A Candidate',
+  anonymousEmail: 'hidden@example.com',
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -120,6 +122,12 @@ Blinder.prototype.blindElements = function (selectorOrElements, fn) {
 Blinder.prototype.blindName = function (selectorOrElement) {
   var element = this.lookupElementIfNeeded(selectorOrElement);
   if (element) element.textContent = this.options.anonymousName;
+}
+
+// Replaces the text of the given element with the configured anonymous email.
+Blinder.prototype.blindEmail = function (selectorOrElement) {
+  var element = this.lookupElementIfNeeded(selectorOrElement);
+  if (element) element.textContent = this.options.anonymousEmail;
 }
 
 // Replaces the src property of the given image element with the configured anonymous image src
