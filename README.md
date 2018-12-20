@@ -9,7 +9,7 @@ of irrelevant details.
 How to get it
 -------------
 
-Install it from the [Chrome Web Store](https://chrome.google.com/webstore/detail/blind-audition/chhkegnhdpnnkdeifjclncaifijfjfjm)
+Install it from the [Chrome Web Store](https://chrome.google.com/webstore/detail/blind-audition/gjpejfdnljndlaljlaabjhncaefaejka)
 
 How to help
 -----------
