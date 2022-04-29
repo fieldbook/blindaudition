@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Blind Audition",
-  "version": "0.5",
+  "version": "0.6",
   "description": "Anonymizes candidates on recruiting sites",
   "author": "Jason Crawford <jason@fieldbook.com>",
 
@@ -35,6 +35,10 @@
     {
       "matches": ["*://app.greenhouse.io/people/*"],
       "js": ["blinder.js", "sites/greenhouse.js"]
+    },
+    {
+      "matches": ["*://github.com/*"],
+      "js": ["blinder.js", "sites/github.js"]
     }
   ]
 }

@@ -27,6 +27,8 @@ Blinder.params = [
   'anonymousName',        // Placeholder text to blind candidate names with
   'anonymousNameForText', // Placeholder text for replacing a candidate name in a paragraph of text
   'anonymousEmail',       // Placeholder text to blind candidate emails with
+  'anonymousLocation',    // Placeholder text to blind candidate location with
+  'anonymousWebsite',     // Placeholder text to blind candidate location with
   'anonymousImgSrc',      // Source URL of a placeholder image. This is typically a per-site setting
 ];
 
@@ -34,6 +36,8 @@ Blinder.defaults = {
   anonymousName: 'A Candidate',
   anonymousNameForText: 'Candidate',
   anonymousEmail: 'hidden@example.com',
+  anonymousLocation: 'Anytown, Earth',
+  anonymousWebsite: 'https://www.google.com',
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -132,7 +136,7 @@ Blinder.prototype.blind = function (selectorOrElement, fn) {
   self.blindElement(element, fn);
 }
 
-// Invokes the given function on the given element (or the element matching the given seletor).
+// Invokes the given function on the given element (or the element matching the given selector).
 // Used to drill one level into the DOM tree.
 Blinder.prototype.blindElement = function (selectorOrElement, fn) {
   var element = this.lookupElementIfNeeded(selectorOrElement);
@@ -165,6 +169,18 @@ Blinder.prototype.blindName = function (selectorOrElement) {
 Blinder.prototype.blindEmail = function (selectorOrElement) {
   var element = this.lookupElementIfNeeded(selectorOrElement);
   if (element) element.textContent = this.options.anonymousEmail;
+}
+
+// Replaces the text of the given element with the configured anonymous location.
+Blinder.prototype.blindLocation = function (selectorOrElement) {
+  var element = this.lookupElementIfNeeded(selectorOrElement);
+  if (element) element.textContent = this.options.anonymousLocation;
+}
+
+// Replaces the text of the given element with the configured anonymous Website.
+Blinder.prototype.blindWebsite = function (selectorOrElement) {
+  var element = this.lookupElementIfNeeded(selectorOrElement);
+  if (element) element.textContent = this.options.anonymousWebsite;
 }
 
 // Replaces the src property of the given image element with the configured anonymous image src
