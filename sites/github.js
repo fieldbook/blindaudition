@@ -7,8 +7,9 @@ var userNameElement = document.querySelector('.p-nickname');
 var username = userNameElement ? userNameElement.innerText : false;
 
 blinder.blind('body', function () {
-    // remove name from tab title
+    // Remove name from tab title
     document.title = "Candidate Github Profile";
+    this.blindPic('.avatar');
 
     this.blindElements('.h-card', function () {
         this.blindPic('.avatar');
@@ -19,36 +20,44 @@ blinder.blind('body', function () {
         this.blindWebsite('.vcard-details [itemprop="url"]');
     })
 
-    // blind username in sticky bar
+    // Blind elements in sticky bar
     this.blindElements('.user-profile-sticky-bar', function () {
         this.blindName('.user-profile-mini-vcard span strong');
         this.blindPic('.avatar-user');
     })
 
-    // blind avatar in PRs
+    // Blind avatar in PRs
     this.blindElements('.pull-discussion-timeline', function () {
-        this.blindElements('.TimelineItem', function () {
-            this.blindPic('.avatar-user');
-        })
-        this.blindElements('.timeline-comment-group', function () {
-            this.blindName('.Link--primary');
-            this.blindPic('.avatar-user');
-        })
+        this.blindPic('.avatar-user img');
+        this.blindPic('.avatar-user');
+    })
+    
+    this.blindElements( '.participant-avatar', function() {
+        this.blindPic('.avatar-user');
     })
 
-    // Hide avatar in commits
+    // Hide avatar in commits & Issues
     this.blindElements('.TimelineItem-body', function () {      
-        this.blindElements('.Box-row', function () {
-            this.blindPic('.avatar-user img');
-        });
+        this.blindPic('.avatar-user');
+        this.blindPic('.avatar-user img');
     })
 
-    // Hide avatar in commits
     this.blindElements('.AvatarStack-body', function () {      
         this.blindPic('.avatar-user img');
     })
 
-    // blind avatars in popups from hover actions
+    this.blindElements('.TimelineItem-avatar', function () {      
+        this.blindPic('.avatar');
+        this.blindPic('img');
+    })
+
+    // PR sidebar
+    this.blindElements('.d-flex', function () {      
+        this.blindPic('.avatar');
+     })
+    
+
+    // Blind avatars in popups from hover actions
     this.blindElements('.Popover', function () {
         this.blindPic('.avatar-user');
         this.blindName('.Link--primary');
