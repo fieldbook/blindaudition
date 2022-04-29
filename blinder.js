@@ -177,7 +177,7 @@ Blinder.prototype.blindLocation = function (selectorOrElement) {
   if (element) element.textContent = this.options.anonymousLocation;
 }
 
-// Replaces the text of the given element with the configured anonymous location.
+// Replaces the text of the given element with the configured anonymous Website.
 Blinder.prototype.blindWebsite = function (selectorOrElement) {
   var element = this.lookupElementIfNeeded(selectorOrElement);
   if (element) element.textContent = this.options.anonymousWebsite;

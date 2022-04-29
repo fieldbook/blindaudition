@@ -13,7 +13,6 @@ blinder.blind('body', function () {
     this.blindElements('.h-card', function () {
         this.blindPic('.avatar');
         this.blindName('.vcard-fullname');
-        // this.blindName('.p-nickname');
         
         this.blindEmail('.vcard-details [itemprop="email"]');
         this.blindLocation('.vcard-details [itemprop="homeLocation"]');
